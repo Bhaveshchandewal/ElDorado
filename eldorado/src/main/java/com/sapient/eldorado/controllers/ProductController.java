@@ -14,21 +14,33 @@ import com.sapient.eldorado.services.ProductService;
 
 @RestController
 public class ProductController {
-	
+
 	@Autowired
 	private ProductService productservice;
-	
+
 	static Logger log = Logger.getLogger(ProductController.class.getName());
-	
+
 	@GetMapping("/")
 	public String hello() {
 		log.info("Greeting from Product Controller Hello");
 		return "Hello";
 	}
-	
+
 	@PostMapping("/admin/product")
-	public void addProduct(@RequestBody Product product) throws EmptyFieldException, InvalidEntryException {
-		productservice.addProductService(product);
+	public void addProduct(@RequestBody Product product) {
+		try {
+			productservice.addProductService(product);
+			if (product != null)
+				log.info("Product Added Successfully");
+			else
+				log.info("Product Details Not Recieved");
+		} catch (EmptyFieldException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage(), e);
+		} catch (InvalidEntryException e) {
+			// TODO Auto-generated catch block
+			log.error(e.getMessage(), e);
+		}
 	}
 
 }

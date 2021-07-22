@@ -37,7 +37,6 @@ public class Product {
 		this.pdfLink = pdfLink;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", desc=" + desc + ", category=" + category + ", price=" + price
